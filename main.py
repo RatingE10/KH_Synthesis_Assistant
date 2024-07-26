@@ -34,7 +34,7 @@ def material_log(needed_materials):
             "The material log is in Edit Mode. Choose the category of material and the name to input how many of the "
             "material you have. To view all materials of a current category, press this button:")
         log_switch = st.button("Switch to View Mode")
-        material_type = st.selectbox("Select a type of material", ["Shard", "Gem", "Misc", "Stone"],
+        material_type = st.selectbox("Select a type of material", ["Shard", "Gem", "Crystal", "Misc", "Stone"],
                                      placeholder="Choose a stone")
 
         match material_type:
@@ -45,6 +45,9 @@ def material_log(needed_materials):
             case "Gem":
                 st.selectbox("Select a material", ["Blaze", "Bright", "Frost", "Lucid", "Power", "Spirit", "Thunder"],
                              key=material_type)
+            case "Crystal":
+                st.selectbox("Select a material", ["Bright", "Power", "Lucid", "Shiny"]
+                             ,key=material_type)
             case "Misc":
                 st.selectbox("Select a material",
                              ['Dark Matter', 'Gale', 'Mystery Goo', 'Mythril', 'Orichalcum', 'Serenity Power'],
