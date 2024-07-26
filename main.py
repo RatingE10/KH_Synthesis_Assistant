@@ -187,7 +187,6 @@ def recipe_synthesis():
                 i += 1
             if i > 3:
                 i = 1
-    st.write(st.session_state.crafted)
     if reset:
         for group in st.session_state.recipes:
             for element in st.session_state.recipes[group]:
