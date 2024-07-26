@@ -146,7 +146,7 @@ def material_log(needed_materials):
         for element in st.session_state.have_materials[material_type]:
             materials_left[material_type][element] = material_need[material_type][element] - \
                                       st.session_state.have_materials[material_type][element] if \
-                material_need[material_type][element] - st.session_state.have_materials[material_type][
+                material_need[0][material_type][element] - st.session_state.have_materials[material_type][
                     element] > 0 else 0
         df.add_rows(pd.DataFrame(materials_left, index=["Materials Left"]))
 
