@@ -79,6 +79,14 @@ def material_log(needed_materials):
         st.write("This is View Mode. Select a category to view how many materials of that type you have.")
         log_switch = st.button("Switch to Edit Mode")
 
+        material_type = st.selectbox("Select a type of material", ["Shard", "Gem", "Misc", "Stone"],
+                                     placeholder="Choose a category")
+        df = st.dataframe(pd.DataFrame(st.session_state.have_materials[material_type],index=["Your Materials"]))
+        materials_left = st.session_state.have_materials[material_type]
+        for element in st.session_state.have_materials[material_type]:
+            materials_left[element] = material_need[material_type][element] - st.session_state.have_materials[material_type][element] if material_need[material_type][element] - st.session_state.have_materials[material_type][element] > 0 else 0
+        df.add_rows(pd.DataFrame(materials_left,index=["Materials Left"]))
+
         if log_switch:
             st.session_state.log_state = 0
             st.rerun()
