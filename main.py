@@ -79,9 +79,15 @@ def material_log(needed_materials):
                         st.session_state.have_materials[material_type][st.session_state[material_type]]) + " more.")
             else:
                 st.success("Congratulations! You're completely done with this material!")
+        set_max = st.button("Press to set all materials to max")
+        if set_max:
+            for category in st.session_state.have_materials:
+                for material in st.session_state.have_materials[category]:
+                    st.session_state.have_materials[category][material] = 999
         if log_switch:
             st.session_state.log_state = 1
             st.rerun()
+
     if st.session_state.log_state is 1:
         st.write("This is View Mode. Select a category to view how many materials of that type you have.")
         log_switch = st.button("Switch to Edit Mode")
@@ -129,6 +135,8 @@ def recipe_synthesis():
         st.session_state.crafted = 30
 
     reset = st.button("Reset recipes")
+
+    st.write(st.session_state.crafted)
 
     for group in st.session_state.recipes:
 
@@ -181,6 +189,7 @@ def recipe_synthesis():
                 i += 1
             if i > 3:
                 i = 1
+    st.write(st.session_state.crafted)
     if reset:
         for group in st.session_state.recipes:
             for element in st.session_state.recipes[group]:
