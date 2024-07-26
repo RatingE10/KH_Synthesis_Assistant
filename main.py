@@ -135,9 +135,7 @@ def recipe_synthesis():
         st.session_state.crafted = 30
 
     reset = st.button("Reset recipes")
-
-    st.write(st.session_state.crafted)
-
+    st.session_state.crafted = 0
     for group in st.session_state.recipes:
 
         org1, org2, org3 = st.columns([1, 1, 1], vertical_alignment="bottom")
@@ -194,7 +192,7 @@ def recipe_synthesis():
         for group in st.session_state.recipes:
             for element in st.session_state.recipes[group]:
                 st.session_state.recipes[group][element]['crafted'] = False
-        st.session_state.crafted = 0
+
         st.rerun()
 
 
