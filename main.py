@@ -144,7 +144,7 @@ def material_log(needed_materials):
             }
         }]
         for element in st.session_state.have_materials[material_type]:
-            materials_left[element] = material_need[material_type][element] - \
+            materials_left[material_type][element] = material_need[material_type][element] - \
                                       st.session_state.have_materials[material_type][element] if \
                 material_need[material_type][element] - st.session_state.have_materials[material_type][
                     element] > 0 else 0
