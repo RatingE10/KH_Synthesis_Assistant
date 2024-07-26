@@ -95,19 +95,19 @@ def material_log(needed_materials):
         st.write("This is View Mode. Select a category to view how many materials of that type you have.")
         log_switch = st.button("Switch to Edit Mode")
 
-        material_type = st.selectbox("Select a type of material", ["Shard", "Gem", "Crystal","Misc", "Stone"],
+        material_type = st.selectbox("Select a type of material", ["Shard", "Gem", "Crystal", "Misc", "Stone"],
                                      placeholder="Choose a category")
         df = st.dataframe(pd.DataFrame(st.session_state.have_materials[material_type], index=["Your Materials"]))
         materials_left = [{'Shard': {
-                'Blaze': 0,
-                'Bright': 0,
-                'Frost': 0,
-                'Lucid': 0,
-                'Mythril': 0,
-                'Power': 0,
-                'Spirit': 0,
-                'Thunder': 0,
-            },
+            'Blaze': 0,
+            'Bright': 0,
+            'Frost': 0,
+            'Lucid': 0,
+            'Mythril': 0,
+            'Power': 0,
+            'Spirit': 0,
+            'Thunder': 0,
+        },
             'Gem': {
                 'Blaze': 0,
                 'Bright': 0,
@@ -144,8 +144,8 @@ def material_log(needed_materials):
             }
         }]
         for element in st.session_state.have_materials[material_type]:
-            materials_left[material_type][element] = material_need[material_type][element] - \
-                                      st.session_state.have_materials[material_type][element] if \
+            materials_left[0][material_type][element] = material_need[material_type][element] - \
+                                                     st.session_state.have_materials[material_type][element] if \
                 material_need[0][material_type][element] - st.session_state.have_materials[material_type][
                     element] > 0 else 0
         df.add_rows(pd.DataFrame(materials_left, index=["Materials Left"]))
@@ -214,7 +214,8 @@ def recipe_synthesis():
             break
         elif group is "6" and st.session_state.crafted < 30:
             st.html("<h3>Sorry, Group 6 isn't unlocked yet. You need to craft one of each item to unlock the "
-                    "final 3 items. You need <span style= color:aqua>" + str(30 - st.session_state.crafted) + "</span> more items.")
+                    "final 3 items. You need <span style= color:aqua>" + str(
+                30 - st.session_state.crafted) + "</span> more items.")
             break
         else:
             with org1:
@@ -285,8 +286,9 @@ def create_dropdown(element, group):
                         category = key.split(" ")[2]
                         name = key.split(" ")[0] + " " + key.split(" ")[1]
 
-                    if category is not 0 and name is not 0 and st.session_state.have_materials[category][name] < st.session_state.recipes[group][element][
-                        key] and category is not 0:
+                    if category is not 0 and name is not 0 and st.session_state.have_materials[category][name] < \
+                            st.session_state.recipes[group][element][
+                                key] and category is not 0:
                         st.error("Oh no! You're missing " + str(
                             st.session_state.have_materials[category][name] - st.session_state.recipes[group][element][
                                 key] * -1) + " " + ((name + " " + category) if category is not 'Misc' else name) + (
