@@ -1,3 +1,4 @@
+import numpy
 import pandas as pd
 import requests
 import streamlit as st
@@ -98,8 +99,8 @@ def material_log(needed_materials):
         material_type = st.selectbox("Select a type of material", ["Shard", "Gem", "Crystal", "Misc", "Stone"],
                                      placeholder="Choose a category")
         df = st.dataframe(pd.DataFrame(st.session_state.have_materials[material_type], index=["Your Materials"]))
-        materials_left = [{'Shard': {
-            'Blaze': 0,
+        materials_left = {'Shard': {
+            'Blaze': 1,
             'Bright': 0,
             'Frost': 0,
             'Lucid': 0,
@@ -142,13 +143,10 @@ def material_log(needed_materials):
                 'Power': 0,
                 'Stormy': 0,
             }
-        }]
+        }
         for element in st.session_state.have_materials[material_type]:
-            materials_left[0][material_type][element] = material_need[material_type][element] - \
-                                                     st.session_state.have_materials[material_type][element] if \
-                material_need[0][material_type][element] - st.session_state.have_materials[material_type][
-                    element] > 0 else 0
-        df.add_rows(pd.DataFrame(materials_left, index=["Materials Left"]))
+            materials_left[material_type][element] = material_need[material_type][element] - st.session_state.have_materials[material_type][element] if (material_need[material_type][element] -st.session_state.have_materials[material_type][element] > 0) else 0
+        df.add_rows(pd.DataFrame(materials_left[material_type], index=["Materials Left"]))
 
         if log_switch:
             st.session_state.log_state = 0
