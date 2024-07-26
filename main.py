@@ -50,7 +50,7 @@ def material_log(needed_materials):
                              ['Dark Matter', 'Gale', 'Mystery Goo', 'Mythril', 'Orichalcum', 'Serenity Power'],
                              key=material_type)
             case "Stone":
-                st.selectbox("Select a material", ["Blazing"], key=material_type)
+                st.selectbox("Select a material", ["Blazing", 'Dazzling', 'Energy', 'Frost', 'Fury', 'Lightning', 'Mythril', 'Power', 'Stormy'], key=material_type)
         with st.form('material_amount'):
             st.number_input(
                 "Please input the number of " + st.session_state[material_type] + " " + material_type + "s you have.",
