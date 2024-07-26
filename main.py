@@ -47,13 +47,15 @@ def material_log(needed_materials):
                              key=material_type)
             case "Crystal":
                 st.selectbox("Select a material", ["Bright", "Power", "Lucid", "Shiny"]
-                             ,key=material_type)
+                             , key=material_type)
             case "Misc":
                 st.selectbox("Select a material",
                              ['Dark Matter', 'Gale', 'Mystery Goo', 'Mythril', 'Orichalcum', 'Serenity Power'],
                              key=material_type)
             case "Stone":
-                st.selectbox("Select a material", ["Blazing", 'Dazzling', 'Energy', 'Frost', 'Fury', 'Lightning', 'Mythril', 'Power', 'Stormy'], key=material_type)
+                st.selectbox("Select a material",
+                             ["Blazing", 'Dazzling', 'Energy', 'Frost', 'Fury', 'Lightning', 'Mythril', 'Power',
+                              'Stormy'], key=material_type)
         with st.form('material_amount'):
             st.number_input(
                 "Please input the number of " + st.session_state[material_type] + " " + material_type + "s you have.",
@@ -125,17 +127,18 @@ def recipe_synthesis():
 
     if st.session_state['2']:
         st.session_state.crafted = 3
-    if st.session_state['3']:
+    elif st.session_state['3']:
         st.session_state.crafted = 9
-    if st.session_state['4']:
+    elif st.session_state['4']:
         st.session_state.crafted = 15
-    if st.session_state['5']:
+    elif st.session_state['5']:
         st.session_state.crafted = 21
-    if st.session_state['6']:
+    elif st.session_state['6']:
         st.session_state.crafted = 30
-
+    else:
+        st.session_state.crafted = 0
     reset = st.button("Reset recipes")
-    st.session_state.crafted = 0
+
     for group in st.session_state.recipes:
 
         org1, org2, org3 = st.columns([1, 1, 1], vertical_alignment="bottom")
@@ -236,7 +239,9 @@ def create_dropdown(element, group):
                     elif len(key.split(" ")) is 3:
                         category = key.split(" ")[2]
                         name = key.split(" ")[0] + " " + key.split(" ")[1]
-                    if st.session_state.have_materials[category][name] < st.session_state.recipes[group][element][key]:
+
+                    if category is not 0 and name is not 0 and st.session_state.have_materials[category][name] < st.session_state.recipes[group][element][
+                        key] and category is not 0:
                         st.error("Oh no! You're missing " + str(
                             st.session_state.have_materials[category][name] - st.session_state.recipes[group][element][
                                 key] * -1) + " " + ((name + " " + category) if category is not 'Misc' else name) + (
