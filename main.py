@@ -16,6 +16,7 @@ def synth_list(materials):
             " materials, try the Material Log.</p>")
     st.dataframe(pd.DataFrame(materials["Shard"], index=['Shards']))
     st.dataframe(pd.DataFrame(materials["Gem"], index=['Gems']))
+    st.dataframe(pd.DataFrame(materials["Crystal"], index=['Crystal']))
     st.dataframe(pd.DataFrame(materials["Misc"], index=['Miscellaneous\nMaterials']))
 
     st.caption("These materials are exclusive to the Final Mix version of the game and come from special Heartless "
@@ -94,7 +95,7 @@ def material_log(needed_materials):
         st.write("This is View Mode. Select a category to view how many materials of that type you have.")
         log_switch = st.button("Switch to Edit Mode")
 
-        material_type = st.selectbox("Select a type of material", ["Shard", "Gem", "Misc", "Stone"],
+        material_type = st.selectbox("Select a type of material", ["Shard", "Gem", "Crystals","Misc", "Stone"],
                                      placeholder="Choose a category")
         df = st.dataframe(pd.DataFrame(st.session_state.have_materials[material_type], index=["Your Materials"]))
         materials_left = st.session_state.have_materials[material_type]
@@ -169,7 +170,7 @@ def recipe_synthesis():
             break
         elif group is "6" and st.session_state.crafted < 30:
             st.html("<h3>Sorry, Group 6 isn't unlocked yet. You need to craft one of each item to unlock the "
-                    "final 3 items.")
+                    "final 3 items. You need <span style= color:aqua>" + str(30 - st.session_state.crafted) + "</span> more items.")
             break
         else:
             with org1:
