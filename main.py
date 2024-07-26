@@ -98,7 +98,51 @@ def material_log(needed_materials):
         material_type = st.selectbox("Select a type of material", ["Shard", "Gem", "Crystal","Misc", "Stone"],
                                      placeholder="Choose a category")
         df = st.dataframe(pd.DataFrame(st.session_state.have_materials[material_type], index=["Your Materials"]))
-        materials_left = st.session_state.have_materials[material_type]
+        materials_left = [{'Shard': {
+                'Blaze': 0,
+                'Bright': 0,
+                'Frost': 0,
+                'Lucid': 0,
+                'Mythril': 0,
+                'Power': 0,
+                'Spirit': 0,
+                'Thunder': 0,
+            },
+            'Gem': {
+                'Blaze': 0,
+                'Bright': 0,
+                'Frost': 0,
+                'Lucid': 0,
+                'Power': 0,
+                'Spirit': 0,
+                'Thunder': 0,
+            },
+            'Crystal': {
+                'Bright': 0,
+                'Lucid': 0,
+                'Power': 0,
+                'Shiny': 0,
+            },
+            'Misc': {
+                'Dark Matter': 0,
+                'Gale': 0,
+                'Mystery Goo': 0,
+                'Mythril': 0,
+                'Orichalcum': 0,
+                'Serenity Power': 0
+            },
+            'Stone': {
+                'Blazing': 0,
+                'Dazzling': 0,
+                'Energy': 0,
+                'Frost': 0,
+                'Fury': 0,
+                'Lightning': 0,
+                'Mythril': 0,
+                'Power': 0,
+                'Stormy': 0,
+            }
+        }]
         for element in st.session_state.have_materials[material_type]:
             materials_left[element] = material_need[material_type][element] - \
                                       st.session_state.have_materials[material_type][element] if \
