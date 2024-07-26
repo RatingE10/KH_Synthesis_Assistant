@@ -143,20 +143,20 @@ def recipe_synthesis():
                     9 - st.session_state.crafted) + "</span> more items to be able "
                                                     "to unlock it.")
             break
-        elif group is 4 and st.session_state.crafted < 15:
+        elif group is "4" and st.session_state.crafted < 15:
             st.html(
                 "<h3>Sorry, Group 4 isn't unlocked yet. Craft <span style= color:aqua>" + str(
                     15 - st.session_state.crafted) + "</span> more items to be able "
                                                      "to unlock it.")
             break
-        elif group is 5 and st.session_state.crafted < 21:
+        elif group is "5" and st.session_state.crafted < 21:
             st.html(
                 "<h3>Sorry, Group 5 isn't unlocked yet. Craft <span style= color:aqua>" + str(
                     21 - st.session_state.crafted) + "</span> more items to be able "
                                                      "to unlock it.")
             break
-        elif group is 6 and st.session_state.crafted < 30:
-            st.html("<h3>Sorry, Group 7 isn't unlocked yet. You need to craft one of each item to unlock the "
+        elif group is "6" and st.session_state.crafted < 30:
+            st.html("<h3>Sorry, Group 6 isn't unlocked yet. You need to craft one of each item to unlock the "
                     "final 3 items.")
             break
         else:
@@ -199,7 +199,7 @@ def create_dropdown(element, group):
                 category = 0
                 name = 0
                 if len(key.split(" ")) is 2:
-                    if key.split(" ")[1] is 'Misc':
+                    if key.split(" ")[1] == "Misc":
                         st.write(key.split(" ")[0] + ": " + str(
                             st.session_state.have_materials[key.split(" ")[1]][key.split(" ")[0]]) + "/" + str(
                             st.session_state.recipes[group][element][key]))
@@ -214,6 +214,7 @@ def create_dropdown(element, group):
                         st.session_state.have_materials[key.split(" ")[2]][
                             key.split(" ")[0] + " " + key.split(" ")[1]]) + "/" + str(
                         st.session_state.recipes[group][element][key]))
+
             st.html("<h4>Would you like to craft this item?</h4>")
 
             to_Craft = st.button("Confirm", key='to_Craft' + element)
