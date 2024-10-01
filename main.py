@@ -246,11 +246,11 @@ def create_dropdown(element, group):
                     if category is not 0 and name is not 0 and st.session_state.have_materials[category][name] < \
                             st.session_state.recipes[group][element][
                                 key] and category is not 0:
-                        st.error("Oh no! You're missing " + str(
+                        st.error("Oh no! You\'re missing {0} {1}{2}".format(str(
                             st.session_state.have_materials[category][name] - st.session_state.recipes[group][element][
-                                key] * -1) + " " + ((name + " " + category) if category is not 'Misc' else name) + (
-                                     "s. " if st.session_state.have_materials[category][name] -
-                                              st.session_state.recipes[group][element][key] * -1 != 1 else ". "))
+                                key] * -1), (('{0} {1}'.format(name, category)) if category is not 'Misc' else name), (
+                            "s. " if st.session_state.have_materials[category][name] -
+                                     st.session_state.recipes[group][element][key] * -1 != 1 else ". ")))
                         return 0
                 st.session_state.recipes[group][element]['crafted'] = True
                 for key in st.session_state.recipes[group][element]:
